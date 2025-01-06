@@ -1,0 +1,141 @@
+/* Overall Container */
+.container {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Section styles */
+  .section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Header in each section */
+  .heading {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #002855; /* Blue color for headings */
+  }
+  
+  /* Profile Info Grid */
+  .profileInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  /* Form Group Styling */
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  /* Label Styling */
+  .label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #002855; /* Blue color for labels */
+  }
+  
+  /* Input Fields Styling */
+  .input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #002855; /* Blue border for input fields */
+    border-radius: 4px;
+  }
+  
+  /* Textarea Styling */
+  .textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #002855; /* Blue border for textarea */
+    border-radius: 4px;
+    min-height: 80px;
+  }
+  
+  /* Photo Upload Styling */
+  .photoContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .photoPreview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #999;
+    border: 1px dashed #002855; /* Blue dashed border around photo preview */
+  }
+  
+  /* Buttons */
+  .button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 10px;
+    background-color: #002855; /* Blue button background */
+    color: #fff; /* White text on blue button */
+    cursor: pointer;
+    border: none;
+  }
+  
+  button {
+    background-color: #002855; /* Blue background for sign out button */
+    color: #fff; /* White text for button */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Radio Button Group */
+  .radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .radioGroup label {
+    color: #002855; /* Blue color for radio button labels */
+  }
+  
+  /* Checkbox Group */
+  .checkboxGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Sign Out Button */
+  .signoutButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff4d4d; /* Red color for the sign-out button */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* Background styling for the page */
+  body {
+    background-color: #f1f1f1; /* Soft background color */
+  }
+  

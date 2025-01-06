@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.signup-container {
+    display: flex;
+    height: 100vh;
+}
+
+.signup-left {
+    flex: 1;
+    background-color: #002855;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    fill: #ffffff;
+}
+
+.signup-right {
+    flex: 1.5;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 50px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333333;
+}
+
+.tab-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    cursor: pointer;
+    color: #333333;
+    font-size: 16px;
+}
+
+.tab.active {
+    border-color: #007b5e;
+    color: #007b5e;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.signup-btn {
+    padding: 10px;
+    background-color: #007b5e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-btn:hover {
+    background-color: #005f47;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.or-divider span {
+    font-size: 14px;
+    color: #666666;
+}
+
+.google-signup-btn {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.google-signup-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.signup-links {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.signup-links a {
+    color: #007b5e;
+    text-decoration: none;
+}
+
+.signup-links a:hover {
+    text-decoration: underline;
+}
