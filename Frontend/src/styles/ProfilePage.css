@@ -1,3 +1,4 @@
+
 /* Overall Container */
 .container {
     font-family: 'Arial', sans-serif;
@@ -7,71 +8,71 @@
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Section styles */
-  .section {
+}
+
+/* Section styles */
+.section {
     margin-bottom: 30px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
-  }
-  
-  /* Header in each section */
-  .heading {
+}
+
+/* Header in each section */
+.heading {
     font-size: 18px;
     margin-bottom: 15px;
     font-weight: bold;
     color: #002855; /* Blue color for headings */
-  }
-  
-  /* Profile Info Grid */
-  .profileInfo {
+}
+
+/* Profile Info Grid */
+.profileInfo {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-  }
-  
-  /* Form Group Styling */
-  .formGroup {
+}
+
+/* Form Group Styling */
+.formGroup {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-  }
-  
-  /* Label Styling */
-  .label {
+}
+
+/* Label Styling */
+.label {
     font-size: 14px;
     margin-bottom: 5px;
     color: #002855; /* Blue color for labels */
-  }
-  
-  /* Input Fields Styling */
-  .input {
+}
+
+/* Input Fields Styling */
+.input {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #002855; /* Blue border for input fields */
     border-radius: 4px;
-  }
-  
-  /* Textarea Styling */
-  .textarea {
+}
+
+/* Textarea Styling */
+.textarea {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #002855; /* Blue border for textarea */
     border-radius: 4px;
     min-height: 80px;
-  }
-  
-  /* Photo Upload Styling */
-  .photoContainer {
+}
+
+/* Photo Upload Styling */
+.photoContainer {
     display: flex;
     align-items: center;
     gap: 20px;
-  }
-  
-  .photoPreview {
+}
+
+.photoPreview {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -82,10 +83,10 @@
     font-size: 14px;
     color: #999;
     border: 1px dashed #002855; /* Blue dashed border around photo preview */
-  }
-  
-  /* Buttons */
-  .button {
+}
+
+/* Buttons */
+.button {
     padding: 8px 15px;
     font-size: 14px;
     border-radius: 10px;
@@ -93,37 +94,37 @@
     color: #fff; /* White text on blue button */
     cursor: pointer;
     border: none;
-  }
-  
-  button {
+}
+
+button {
     background-color: #002855; /* Blue background for sign out button */
     color: #fff; /* White text for button */
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  /* Radio Button Group */
-  .radioGroup {
+}
+
+/* Radio Button Group */
+.radioGroup {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  .radioGroup label {
+}
+
+.radioGroup label {
     color: #002855; /* Blue color for radio button labels */
-  }
-  
-  /* Checkbox Group */
-  .checkboxGroup {
+}
+
+/* Checkbox Group */
+.checkboxGroup {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  /* Sign Out Button */
-  .signoutButton {
+}
+
+/* Sign Out Button */
+.signoutButton {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #ff4d4d; /* Red color for the sign-out button */
@@ -132,10 +133,84 @@
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-  }
-  
-  /* Background styling for the page */
-  body {
+}
+
+/* Background styling for the page */
+body {
     background-color: #f1f1f1; /* Soft background color */
-  }
-  
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    /* Adjust grid layout for smaller screens */
+    .profileInfo {
+        grid-template-columns: 1fr; /* Stacks elements vertically */
+    }
+
+    /* Make photo container more flexible */
+    .photoContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .photoPreview {
+        width: 60px;
+        height: 60px;
+    }
+
+    .button {
+        width: 100%; /* Make upload button full width on small screens */
+    }
+
+    /* Make form input fields full width on smaller screens */
+    .input,
+    .textarea,
+    .select {
+        width: 100%;
+    }
+
+    .radioGroup {
+        gap: 15px;
+    }
+
+    .checkboxGroup {
+        gap: 15px;
+    }
+
+    .signoutButton {
+        width: 100%; /* Make the sign-out button full width */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust the padding and margins on very small screens */
+    .container {
+        padding: 10px;
+    }
+
+    .heading {
+        font-size: 16px;
+    }
+
+    .label {
+        font-size: 12px;
+    }
+
+    .input,
+    .textarea {
+        font-size: 12px;
+    }
+
+    .photoPreview {
+        width: 50px;
+        height: 50px;
+    }
+
+    .button {
+        padding: 10px 15px;
+    }
+
+    .signoutButton {
+        padding: 12px 15px;
+    }
+}

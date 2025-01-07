@@ -72,7 +72,7 @@ function SignUp() {
         <div className="signup-links">
           <p>
             Already have an account?{' '}
-            <a href="/login">Log in</a>
+            <a href="/">Log in</a>
           </p>
         </div>
       </div>

@@ -31,7 +31,15 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(user));
 
       alert(`Welcome ${user.role === 'mentee' ? 'Mentee' : 'Mentor'}, ${user.name}!`);
-      window.location.href = '/dashboard'; // Redirect to dashboard
+      if(user.role=='mentee')
+      {
+        window.location.href = '/mentorsearch';
+      }
+      else if(user.role=='mentor')
+        {
+          window.location.href = '/dashboard';
+        }
+       // Redirect to dashboard
     } catch (error) {
       console.error('Error during login:', error.response?.data?.message || 'Unexpected error');
       alert(error.response?.data?.message || 'Invalid credentials. Please try again.');
@@ -91,8 +99,8 @@ function Login() {
           <a href="/forgot-password">Forgot password?</a>
           <p>
             Don’t have an account?{' '}
-            <a href="/signup-mentee">Sign up as a mentee</a> or{' '}
-            <a href="/signup-mentor">apply to be a mentor</a>
+            <a href="/signup">Sign up as a mentee</a> or{' '}
+            <a href="/signup">apply to be a mentor</a>
           </p>
         </div>
       </div>

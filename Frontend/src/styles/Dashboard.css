@@ -1,0 +1,122 @@
+/* App.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+  }
+  
+  div.dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .welcome-section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .welcome-section h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5rem;
+  }
+  
+  .welcome-section .card {
+    background: #ffffff;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+  }
+  
+  .welcome-section .card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #444;
+  }
+  
+  .welcome-section .card p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .status-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .level-overview,
+  .active-orders {
+    background: white;
+    padding: 20px;
+    flex: 1 1 calc(50% - 10px);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .level-overview h2,
+  .active-orders h2 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .level-overview p,
+  .active-orders p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .upgrade-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .upgrade-section h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .upgrade-section p {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .status-section {
+      flex-direction: column;
+    }
+  
+    .level-overview,
+    .active-orders {
+      flex: 1 1 100%;
+    }
+  }
+  
