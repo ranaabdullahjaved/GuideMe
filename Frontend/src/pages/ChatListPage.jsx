@@ -45,7 +45,7 @@ const ChatListPage = () => {
             const newTimeout = setTimeout(async () => {
                 try {
                     const res = await axios.get(`http://localhost:5000/api/auth/search?searchTerm=${searchTerm}`);
-                    
+
                     setMentorResults(res.data);
                     // console.log(res.data.length > 0);
                     // console.log(mentorResults.length>0);
@@ -93,7 +93,7 @@ const ChatListPage = () => {
                     />
                     <div className="mentor-results">
                         {mentorResults.length > 0 ? (
-                            
+
                             mentorResults.map((mentor) => (
                                 <div key={mentor._id} className="mentor-result" onClick={() => startConversation(mentor)}>
                                     <img src={`http://localhost:5000/uploads/${mentor.avatar}`} alt="avatar" className="mentor-avatar" />
