@@ -1,0 +1,25 @@
+/* ProjectDetailPage.css */
+.project-detail-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  .project-detail-page h2 {
+    margin-bottom: 1rem;
+  }
+  .project-detail-page p {
+    margin-bottom: 0.5rem;
+  }
+  .apply-btn {
+    padding: 10px 20px;
+    background-color: #007b5e;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .apply-btn:hover {
+    background-color: #005f47;
+  }
+  

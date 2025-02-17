@@ -1,132 +1,196 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
 }
-
 .signup-container {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
-
 .signup-left {
-    flex: 1;
-    background-color: #002855;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #002855;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 200px;
 }
-
 .logo {
-    text-align: center;
+  text-align: center;
 }
-
 .logo-icon {
-    width: 80px;
-    height: 80px;
-    fill: #ffffff;
+  width: 80px;
+  height: 80px;
+  fill: #ffffff;
 }
-
 .signup-right {
-    flex: 1.5;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 50px;
+  flex: 1;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
 }
-
+.signup-content {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
 h2 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333333;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333333;
+  text-align: center;
 }
-
 .tab-switch {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-
 .tab {
-    padding: 10px 20px;
-    border: none;
-    border-bottom: 2px solid transparent;
-    background: none;
-    cursor: pointer;
-    color: #333333;
-    font-size: 16px;
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  color: #333333;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
-
+.tab:hover {
+  background-color: #f5f5f5;
+}
 .tab.active {
-    border-color: #007b5e;
-    color: #007b5e;
+  border-color: #007b5e;
+  color: #007b5e;
 }
-
 .signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-
 input {
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    font-size: 16px;
+  padding: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
-
+input:focus {
+  outline: none;
+  border-color: #007b5e;
+}
+.mentor-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .signup-btn {
-    padding: 10px;
-    background-color: #007b5e;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+  padding: 12px;
+  background-color: #007b5e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
-
 .signup-btn:hover {
-    background-color: #005f47;
+  background-color: #005f47;
 }
-
 .or-divider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
 }
-
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: #cccccc;
+}
+.or-divider::before {
+  left: 0;
+}
+.or-divider::after {
+  right: 0;
+}
 .or-divider span {
-    font-size: 14px;
-    color: #666666;
+  background-color: #ffffff;
+  padding: 0 10px;
+  color: #666666;
+  font-size: 14px;
 }
-
 .google-signup-btn {
-    padding: 10px;
-    background-color: #ffffff;
-    color: #333333;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
 .google-signup-btn:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
-
 .signup-links {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #333333;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #333333;
 }
-
 .signup-links a {
-    color: #007b5e;
-    text-decoration: none;
+  color: #007b5e;
+  text-decoration: none;
 }
-
 .signup-links a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+@media (min-width: 768px) {
+  .signup-container {
+    flex-direction: row;
+  }
+  .signup-left {
+    flex: 1;
+    min-height: 100vh;
+  }
+  .signup-right {
+    flex: 1.5;
+    padding: 3rem;
+  }
+}
+@media (max-width: 767px) {
+  .signup-content {
+    padding: 0 1rem;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  .tab {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  input, .signup-btn, .google-signup-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  .signup-right {
+    padding: 1rem;
+  }
+  .tab {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
 }

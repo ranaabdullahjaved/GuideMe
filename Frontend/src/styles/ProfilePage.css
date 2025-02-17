@@ -1,216 +1,136 @@
+/* ProfilePage.css */
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 90vh;
+  background: linear-gradient(135deg, #e0f7fa 0%, #e0f2f1 100%);
+}
+.profile-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  overflow: hidden;
+  animation: fadeIn 0.4s ease;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+/* .profile-header {
+  background-color: #2c3e50;
+  padding: 1rem;  
+  text-align: center;
+} */
+.profile-header h2 {
+  background-color: #2c3e50;
+  margin: 0;
+  padding: 1rem;  
 
-/* Overall Container */
-.container {
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  font-size: 1.5rem;
+  color: #fff;  /* Set header text color to white */
 }
 
-/* Section styles */
-.section {
-    margin-bottom: 30px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
+.profile-message {
+  text-align: center;
+  margin: 1rem 0;
+  color: #ffffff;
 }
-
-/* Header in each section */
-.heading {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    color: #002855; /* Blue color for headings */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 1rem auto;
 }
-
-/* Profile Info Grid */
-.profileInfo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+.avatar-label {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
-
-/* Form Group Styling */
-.formGroup {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+.avatar-input {
+  display: block;
+  margin: 0 auto 1rem auto;
+  width: 87.5%;
 }
-
-/* Label Styling */
-.label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #002855; /* Blue color for labels */
+.profile-form {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
 }
-
-/* Input Fields Styling */
-.input {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #002855; /* Blue border for input fields */
-    border-radius: 4px;
+.profile-field {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
 }
-
-/* Textarea Styling */
-.textarea {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #002855; /* Blue border for textarea */
-    border-radius: 4px;
-    min-height: 80px;
+.profile-field label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: #333;
 }
-
-/* Photo Upload Styling */
-.photoContainer {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.profile-field input {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
 }
-
-.photoPreview {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: #999;
-    border: 1px dashed #002855; /* Blue dashed border around photo preview */
+.profile-field input:focus {
+  border-color: #2c3e50;
 }
+.save-changes-btn {
+  background-color: #2c3e50;
 
-/* Buttons */
-.button {
-    padding: 8px 15px;
-    font-size: 14px;
-    border-radius: 10px;
-    background-color: #002855; /* Blue button background */
-    color: #fff; /* White text on blue button */
-    cursor: pointer;
-    border: none;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 1rem 2rem;
+  transition: background-color 0.3s ease;
 }
+.save-changes-btn:hover {
+  background-color: #2c3e50;
 
-button {
-    background-color: #002855; /* Blue background for sign out button */
-    color: #fff; /* White text for button */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
-
-/* Radio Button Group */
-.radioGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.change-pass-cta {
+  margin: 0 auto;
+  background-color: #f44336;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: block;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  width: 75%;
+  
 }
-
-.radioGroup label {
-    color: #002855; /* Blue color for radio button labels */
+.change-pass-cta:hover {
+  background-color: #413f3f;
 }
-
-/* Checkbox Group */
-.checkboxGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.loader {
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #007b5e; 
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
 }
-
-/* Sign Out Button */
-.signoutButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ff4d4d; /* Red color for the sign-out button */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-
-/* Background styling for the page */
-body {
-    background-color: #f1f1f1; /* Soft background color */
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    /* Adjust grid layout for smaller screens */
-    .profileInfo {
-        grid-template-columns: 1fr; /* Stacks elements vertically */
-    }
-
-    /* Make photo container more flexible */
-    .photoContainer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .photoPreview {
-        width: 60px;
-        height: 60px;
-    }
-
-    .button {
-        width: 100%; /* Make upload button full width on small screens */
-    }
-
-    /* Make form input fields full width on smaller screens */
-    .input,
-    .textarea,
-    .select {
-        width: 100%;
-    }
-
-    .radioGroup {
-        gap: 15px;
-    }
-
-    .checkboxGroup {
-        gap: 15px;
-    }
-
-    .signoutButton {
-        width: 100%; /* Make the sign-out button full width */
-    }
-}
-
-@media (max-width: 480px) {
-    /* Adjust the padding and margins on very small screens */
-    .container {
-        padding: 10px;
-    }
-
-    .heading {
-        font-size: 16px;
-    }
-
-    .label {
-        font-size: 12px;
-    }
-
-    .input,
-    .textarea {
-        font-size: 12px;
-    }
-
-    .photoPreview {
-        width: 50px;
-        height: 50px;
-    }
-
-    .button {
-        padding: 10px 15px;
-    }
-
-    .signoutButton {
-        padding: 12px 15px;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

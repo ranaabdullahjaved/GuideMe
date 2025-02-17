@@ -1,9 +1,64 @@
+import { useState, useEffect } from "react";
 import '../styles/HomePage.css';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 export default function HomePage() {
-    return (
-      <div className="app">
-        {/* Header */}
-        <header className="header">
+  const navigate = useNavigate();
+  const [mentorSearch, setMentorSearch] = useState("");
+  const [mentorResults, setMentorResults] = useState([]);
+  const [selectedMentor, setSelectedMentor] = useState("");
+
+  const teamMembers = [
+    {
+      name: "Ali Shah",
+      role: "Full Stack Developer",
+      image: "/src/assets/shah3.JPG",
+    },
+    {
+      name: "Anas Aqeel",
+      role: "Data Scientist",
+      image: "/src/assets/anas.jpeg",
+    },
+    {
+      name: "Mr. Muhammad Usama Hassan Alvi",
+      role: "Project Advisor",
+      image: "/src/assets/sir.jpeg",
+    },
+  ]
+  const handleMentorSelect = async (mentor) => {
+    setSelectedMentor(mentor.email);
+    setMentorSearch(mentor.name);
+    setMentorResults([]);
+    try {
+      const currentUser = JSON.parse(localStorage.getItem("user"));
+      const menteeId = currentUser._id || currentUser.id;
+      const res = await axios.post('http://localhost:5000/api/chat/conversations', {
+        menteeId,
+        mentorId: mentor,
+      });
+      navigate(`/chat/${res.data._id}`);
+    } catch (err) {
+      console.error("Error starting conversation:", err);
+    }
+  };
+  const handleMentorSearch = async (input) => {
+    setMentorSearch(input);
+    if (input.length >= 2) {
+      try {
+        const response = await fetch(`http://localhost:5000/api/courses/search?query=${input}`);
+        const data = await response.json();
+        setMentorResults(data);
+      } catch (error) {
+        console.error("Error searching mentors:", error);
+      }
+    } else {
+      setMentorResults([]);
+    }
+  };
+  return (
+    <div className="app">
+      {/* Header */}
+      {/* <header className="header">
           <div className="header-content">
             <div className="logo">
               <div className="logo-icon"></div>
@@ -19,94 +74,108 @@ export default function HomePage() {
 
             </nav>
           </div>
-        </header>
-  
-        {/* Category Navigation */}
-        <nav className="category-nav">
-          <div className="category-content">
-            {["Engineering Mentors", "Design Mentors", "Startup Mentors", 
-              "Product Managers", "Marketing Coaches", "Leadership Mentors", 
-              "Career Coaches", "Top Mentors"].map(category => (
-              <a key={category} href="#" className="category-link">{category}</a>
+        </header> */}
+
+      {/* Category Navigation */}
+      <nav className="category-nav">
+        <div className="category-content">
+          {["Engineering Mentors", "Design Mentors", "Startup Mentors",
+            "Product Managers", "Marketing Coaches", "Leadership Mentors",
+            "Career Coaches", "Top Mentors"].map(category => (
+              <div key={category} className="category-link">{category}</div>
             ))}
-          </div>
-        </nav>
-  
-        {/* Hero Section */}
-        <section className="hero">
-          <p className="hero-subtitle">Learn a new skill, launch a project, land your dream career.</p>
-          <h1 className="hero-title">
-            1-on-1 <span className="accent-text">Career</span> Mentorship
-          </h1>
-          <div className="hero-search">
-            <input 
-              type="text" 
-              placeholder="Search by company, skills or role" 
-              className="search-input large"
-            />
-            <button className="button primary">Find mentors</button>
-          </div>
-          <div className="category-pills">
-            {["Product Managers", "Career Coaches", "Software Engineers",
-              "Leadership Mentors", "UX Designers", "Data Scientists",
-              "Startup Founders"].map(pill => (
-              <a key={pill} href="#" className="pill">{pill}</a>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="hero">
+        <p className="hero-subtitle">Learn a new skill, launch a project, land your dream career.</p>
+        <h1 className="hero-title">
+          1-on-1 <span className="accent-text">Career</span> Mentorship
+        </h1>
+        <div className="hero-search">
+          <input
+            type="text"
+            placeholder="Search by company, skills or role"
+            className="search-input large"
+            value={mentorSearch}
+            onChange={(e) => handleMentorSearch(e.target.value)}
+          />
+          {mentorResults.length > 0 && (
+            <ul className="mentor-results">
+              {mentorResults.map((mentor) => (
+                <li key={mentor.email} onClick={() => handleMentorSelect(mentor)}>
+                  {mentor.avatar && (
+                    <img
+                      src={`http://localhost:5000/uploads/${mentor.avatar}`}
+                      alt="User Avatar"
+                      className="navbar-avatar"
+                    />
+                  )}
+                  {mentor.name} - {mentor.skill}
+                </li>
+              ))}
+            </ul>
+          )}
+          {/* <button className="button primary">Find mentors</button> */}
+        </div>
+        <div className="category-pills">
+          {["Product Managers", "Career Coaches", "Software Engineers",
+            "Leadership Mentors", "UX Designers", "Data Scientists",
+            "Startup Founders"].map(pill => (
+              <div key={pill} className="pill">{pill}</div>
             ))}
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="stats">
+        <div className="stats-container">
+          <div className="stat-item">
+            <div className="stat-number">5,700+</div>
+            <div className="stat-label">Available mentors</div>
           </div>
-        </section>
-  
-        {/* Stats Section */}
-        <section className="stats">
-          <div className="stats-container">
-            <div className="stat-item">
-              <div className="stat-number">5,700+</div>
-              <div className="stat-label">Available mentors</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">24,900+</div>
-              <div className="stat-label">Matches made</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">130+</div>
-              <div className="stat-label">Countries represented</div>
-            </div>
+          <div className="stat-item">
+            <div className="stat-number">24,900+</div>
+            <div className="stat-label">Matches made</div>
           </div>
-        </section>
-  
-        {/* Mentor Cards */}
-        <section className="mentors">
-          <div className="mentors-grid">
-            {[1, 2, 3].map(mentor => (
-              <div key={mentor} className="mentor-card">
-                <div className="mentor-info">
-                  <div className="mentor-avatar"></div>
-                  <div className="mentor-details">
-                    <h3 className="mentor-name">John Doe</h3>
-                    <p className="mentor-title">Senior Engineer at Tech Corp</p>
-                    <div className="mentor-tags">
-                      <span className="tag">Frontend</span>
-                      <span className="tag">React</span>
-                    </div>
-                  </div>
-                </div>
+          <div className="stat-item">
+            <div className="stat-number">130+</div>
+            <div className="stat-label">Countries represented</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mentor Cards */}
+      <section className="mentors">
+        <h2>Some Of Our Top Mentors:</h2>
+        <div className="team-grid">
+          {teamMembers.map((member, index) => (
+            <div key={member.name} className="team-card" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div className="team-card-image">
+                <img src={member.image || "/placeholder.svg"} alt={member.name} />
               </div>
-            ))}
-          </div>
-        </section>
-  
-        {/* Company Logos */}
-        <section className="companies">
-          <div className="company-logos">
-            {["Airbnb", "Amazon", "Meta", "Microsoft", "Spotify", "Uber"]
-              .map(company => (
+              <div className="team-card-content">
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Company Logos */}
+      <section className="companies">
+        <div className="company-logos">
+          {["Airbnb", "Amazon", "Meta", "Microsoft", "Spotify", "Uber"]
+            .map(company => (
               <div key={company} className="company-logo">
                 <div className="logo-placeholder"></div>
               </div>
             ))}
-          </div>
-        </section>
-      </div>
-    );
-  }
-  
-  
+        </div>
+      </section>
+    </div>
+  );
+}
+

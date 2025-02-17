@@ -107,49 +107,177 @@
   .hero {
     text-align: center;
     padding: 5rem 1rem;
+    background: linear-gradient(to bottom, rgba(20, 184, 166, 0.05), transparent);
+    overflow: hidden; /* Add this to prevent horizontal scrollbar during animation */
   }
   
   .hero-subtitle {
     font-size: 1.125rem;
     margin-bottom: 1rem;
+    opacity: 0;
+    animation: slideFromLeft 1s ease forwards;
+    color: #4b5563;
   }
   
   .hero-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideFromLeft 1s ease forwards 0.3s;
+    line-height: 1.2;
+  }
+  
+  @keyframes slideFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   
   .accent-text {
     color: var(--primary-color);
     border-right: 4px solid var(--primary-color);
     padding-right: 0.5rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .accent-text::after {
+    content: "";
+    position: absolute;
+    right: -4px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary-color);
+    animation: blink 1s step-end infinite;
+  }
+  
+  @keyframes blink {
+    from,
+    to {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
   
   .hero-search {
     max-width: 36rem;
     margin: 0 auto 2rem;
     position: relative;
+    opacity: 0;
+    animation: slideFromLeft 1s ease forwards 0.6s;
   }
   
   .search-input {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.75rem;
     font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
   }
   
   .search-input.large {
-    padding: 1rem;
+    padding: 1.25rem 1.5rem;
+    font-size: 1.1rem;
   }
   
-  .hero-search .button {
+  .mentor-results {
     position: absolute;
-    right: 0.25rem;
-    top: 0.25rem;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 50;
+    animation: slideDown 0.3s ease-out;
+    max-height: 800px;
+    overflow-y: auto;
   }
   
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .mentor-results li {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--border-color);
+    animation: fadeIn 0.3s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .mentor-results li:last-child {
+    border-bottom: none;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .mentor-results li:hover {
+    background-color: rgba(20, 184, 166, 0.05);
+  }
+  
+  .mentor-results .navbar-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid var(--primary-color);
+    transition: transform 0.2s ease;
+  }
+  
+  .mentor-results li:hover .navbar-avatar {
+    transform: scale(1.05);
+  }
+  
+  /* Generate staggered animations for list items */
+  .mentor-results li:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .mentor-results li:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .mentor-results li:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .mentor-results li:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  .mentor-results li:nth-child(5) {
+    animation-delay: 0.3s;
+  }
   /* Category pills */
   .category-pills {
     display: flex;
@@ -196,56 +324,77 @@
   
   /* Mentor cards */
   .mentors {
+    text-align: center;
     padding: 4rem 1rem;
-  }
-  
-  .mentors-grid {
-    max-width: 1200px;
+    max-width: 80%;
     margin: 0 auto;
+}
+
+.mentors h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.team-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .mentor-card {
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .mentor-card:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mentor-info {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .mentor-avatar {
-    width: 5rem;
-    height: 5rem;
-    background-color: var(--background-light);
-    border-radius: 50%;
-  }
-  
-  .mentor-name {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-  
-  .mentor-title {
-    font-size: 0.875rem;
-    color: #666;
-    margin-bottom: 0.5rem;
-  }
-  
-  .mentor-tags {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.team-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+}
+
+.team-card-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.team-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-card-image img {
+    transform: scale(1.05);
+}
+
+.team-card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.team-card-content h3 {
+    color: #2c3e50;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.team-card-content p {
+    color: #7f8c8d;
+    font-size: 16px;
+    margin: 0;
+}
+
   .tag {
     background-color: var(--background-light);
     padding: 0.25rem 0.5rem;
@@ -336,6 +485,14 @@
     .mentor-card {
       animation: none;
     }
+    .hero-subtitle,
+    .hero-title,
+    .hero-search,
+    .mentor-results,
+    .mentor-results li,
+    .accent-text::after {
+      animation: none;
+      opacity: 1;
   }
   
   

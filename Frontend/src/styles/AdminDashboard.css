@@ -1,0 +1,85 @@
+/* AdminDashboard.css */
+.admin-dashboard {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.admin-dashboard h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.admin-message {
+  text-align: center;
+  color: green;
+  margin-bottom: 1rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.admin-table th {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.admin-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.admin-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.approve-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.approve-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}

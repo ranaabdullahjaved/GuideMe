@@ -1,14 +1,17 @@
+// pages/LoginPage.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function LoginPage() {
   const [activeTab, setActiveTab] = useState('mentee');
   const [formData, setFormData] = useState({
-    emailOrUsername: '',
+    email: '',
     password: '',
-    role: 'mentee', // Default to mentee
+    role: 'mentee', // default role
   });
+  const navigate = useNavigate();
 
   const handleTabSwitch = (tab) => {
     setActiveTab(tab);
@@ -22,24 +25,23 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', formData);
-      
+      // POST to your updated backend endpoint
+      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
       const { token, user } = response.data;
 
-      // Store token and user data in localStorage
       localStorage.setItem('authToken', token);
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('role',JSON.stringify(activeTab))
 
-      alert(`Welcome ${user.role === 'mentee' ? 'Mentee' : 'Mentor'}, ${user.name}!`);
-      if(user.role=='mentee')
-      {
-        window.location.href = '/mentorsearch';
+      alert(`Welcome ${user.role}: ${user.name}!`);
+
+      if (user.role === 'mentee') {
+        navigate('/');
+      } else if (user.role === 'mentor') {
+        navigate('/');
+      } else if (user.role === 'admin') {
+        navigate('/admin');
       }
-      else if(user.role=='mentor')
-        {
-          window.location.href = '/dashboard';
-        }
-       // Redirect to dashboard
     } catch (error) {
       console.error('Error during login:', error.response?.data?.message || 'Unexpected error');
       alert(error.response?.data?.message || 'Invalid credentials. Please try again.');
@@ -71,13 +73,19 @@ function Login() {
           >
             I'm a mentor
           </button>
+          <button
+            className={`tab ${activeTab === 'admin' ? 'active' : ''}`}
+            onClick={() => handleTabSwitch('admin')}
+          >
+            I'm an admin
+          </button>
         </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <input
             type="text"
-            name="emailOrUsername"
-            placeholder="Email or username"
-            value={formData.emailOrUsername}
+            name="email"
+            placeholder="Email"
+            value={formData.email}
             onChange={handleChange}
             required
           />
@@ -85,6 +93,7 @@ function Login() {
             type="password"
             name="password"
             placeholder="Password"
+            autoComplete="current-password"
             value={formData.password}
             onChange={handleChange}
             required
@@ -98,9 +107,7 @@ function Login() {
         <div className="login-links">
           <a href="/forgot-password">Forgot password?</a>
           <p>
-            Don’t have an account?{' '}
-            <a href="/signup">Sign up as a mentee</a> or{' '}
-            <a href="/signup">apply to be a mentor</a>
+            Don’t have an account? <a href="/signup">Sign up as a mentee</a> or <a href="/signup">apply to be a mentor</a>
           </p>
         </div>
       </div>
@@ -108,4 +115,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
