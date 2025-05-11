@@ -167,6 +167,11 @@ io.on('connection', (socket) => {
   });
 });
 
+// Verify environment variables
+console.log('Environment variables check:');
+console.log('SMTP_USER:', process.env.SMTP_USER ? 'Set' : 'Not set');
+console.log('SMTP_PASS:', process.env.SMTP_PASS ? 'Set' : 'Not set');
+
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

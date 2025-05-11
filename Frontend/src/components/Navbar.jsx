@@ -61,7 +61,7 @@ const Navbar = () => {
                         </li>
                         <li>
                             <Link to="/projects" onClick={() => setIsMenuOpen(false)}>
-                                projects
+                                Projects
                             </Link>
                         </li>
                         <li>

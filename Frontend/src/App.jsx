@@ -20,6 +20,7 @@ import FeedbackModal from './components/Feeedsback';
 import EditCoursePage from './components/EditsCourseDetail';
 import CollaborationRequestsPage from './pages/CollabRequest';
 import NewCourseModal from './components/NewCoursesModelPage';
+import EmailVerification from './components/EmailVerification';
 
 import ProjectPage from './pages/ProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
@@ -41,6 +42,7 @@ function App() {
         <Route path="/webinar" element={<Webinar />} />
         <Route path="/chat" element={<ChatListPage />} />
         <Route path="/chat/:conversationId" element={<ChatPage />} />
+        <Route path="/verify-email/:token" element={<EmailVerification />} />
         {/* <Route path="/edit-course/:id" element={<EditCoursePage/>}/> */}
 
         {/* Protected Routes */}

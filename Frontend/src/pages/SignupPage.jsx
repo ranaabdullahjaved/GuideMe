@@ -15,8 +15,12 @@ export default function SignupPage() {
     yearsExperience: "",
     linkedin: "",
     education: "",
+    github: "",
+    references: [{ name: "", email: "", phone: "" }, { name: "", email: "", phone: "" }],
   });
   const [avatarFile, setAvatarFile] = useState(null);
+  const [educationCertificateFile, setEducationCertificateFile] = useState(null);
+  const [workExperienceLetterFile, setWorkExperienceLetterFile] = useState(null);
   const navigate = useNavigate();
 
   const handleTabSwitch = (tab) => {
@@ -28,28 +32,73 @@ export default function SignupPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleReferenceChange = (idx, e) => {
+    const updatedReferences = [...formData.references];
+    updatedReferences[idx][e.target.name] = e.target.value;
+    setFormData({ ...formData, references: updatedReferences });
+  };
+
   const handleFileChange = (e) => {
     setAvatarFile(e.target.files[0]);
+  };
+
+  const handleEducationCertificateChange = (e) => {
+    setEducationCertificateFile(e.target.files[0]);
+  };
+
+  const handleWorkExperienceLetterChange = (e) => {
+    setWorkExperienceLetterFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const formDataToSend = new FormData();
+      
+      // Log the form data before sending
+      console.log('Form data before sending:', {
+        ...formData,
+        avatar: avatarFile?.name,
+        educationCertificate: educationCertificateFile?.name,
+        workExperienceLetter: workExperienceLetterFile?.name
+      });
+
       Object.keys(formData).forEach((key) => {
-        formDataToSend.append(key, formData[key]);
+        if (key === "references") {
+          formDataToSend.append("references", JSON.stringify(formData.references));
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
       });
       if (avatarFile) {
         formDataToSend.append("avatar", avatarFile);
       }
-      await axios.post("http://localhost:5000/api/auth/signup", formDataToSend, {
+      if (educationCertificateFile) {
+        formDataToSend.append("educationCertificate", educationCertificateFile);
+      }
+      if (workExperienceLetterFile) {
+        formDataToSend.append("workExperienceLetter", workExperienceLetterFile);
+      }
+
+      // Log the FormData entries
+      console.log('FormData entries:');
+      for (let pair of formDataToSend.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
+
+      const response = await axios.post("http://localhost:5000/api/auth/signup", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("Sign up successful!");
+      alert(response.data.message || "Sign up successful!");
       navigate('/login');
     } catch (error) {
       console.error("Error during signup:", error);
-      alert("Something went wrong. Please try again.");
+      // Show the specific error message from the server if available
+      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+      if (error.response?.data?.details) {
+        console.error('Validation details:', error.response.data.details);
+      }
+      alert(errorMessage);
     }
   };
 
@@ -67,12 +116,8 @@ export default function SignupPage() {
         <div className="signup-content">
           <h2>Sign up</h2>
           <div className="tab-switch">
-            <button className={`tab ${activeTab === "mentee" ? "active" : ""}`} onClick={() => handleTabSwitch("mentee")}>
-              I'm a mentee
-            </button>
-            <button className={`tab ${activeTab === "mentor" ? "active" : ""}`} onClick={() => handleTabSwitch("mentor")}>
-              I'm a mentor
-            </button>
+            <button className={`tab ${activeTab === "mentee" ? "active" : ""}`} onClick={() => handleTabSwitch("mentee")}>I&apos;m a mentee</button>
+            <button className={`tab ${activeTab === "mentor" ? "active" : ""}`} onClick={() => handleTabSwitch("mentor")}>I&apos;m a mentor</button>
           </div>
           <form className="signup-form" onSubmit={handleSubmit} encType="multipart/form-data">
             <input type="text" name="name" placeholder="Full name" value={formData.name} onChange={handleChange} required />
@@ -83,7 +128,25 @@ export default function SignupPage() {
               <div className="mentor-fields">
                 <input type="number" name="yearsExperience" placeholder="Years of experience" value={formData.yearsExperience} onChange={handleChange} required />
                 <input type="url" name="linkedin" placeholder="LinkedIn profile URL" value={formData.linkedin} onChange={handleChange} required />
+                <div className="linkedin-verification-info">We will verify your LinkedIn profile after signup.</div>
                 <input type="text" name="education" placeholder="Education" value={formData.education} onChange={handleChange} required />
+                <label htmlFor="educationCertificateFile">Upload Educational Certificate</label>
+                <input type="file" id="educationCertificateFile" accept="application/pdf,image/*" onChange={handleEducationCertificateChange} />
+                <input type="url" name="github" placeholder="GitHub profile URL" value={formData.github} onChange={handleChange} />
+                <label htmlFor="workExperienceLetterFile">Upload Work Experience Letter</label>
+                <input type="file" id="workExperienceLetterFile" accept="application/pdf,image/*" onChange={handleWorkExperienceLetterChange} />
+                <div className="references-section">
+                  <h3>Professional References</h3>
+                  <p className="reference-helper">Please provide one or two professional references we can contact.</p>
+                  {[0, 1].map(idx => (
+                    <div key={idx} className="reference-card">
+                      <h4>Reference {idx + 1}</h4>
+                      <input type="text" name="name" placeholder="Reference Name" value={formData.references[idx].name} onChange={e => handleReferenceChange(idx, e)} />
+                      <input type="email" name="email" placeholder="Reference Email" value={formData.references[idx].email} onChange={e => handleReferenceChange(idx, e)} />
+                      <input type="text" name="phone" placeholder="Reference Phone" value={formData.references[idx].phone} onChange={e => handleReferenceChange(idx, e)} />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             <label htmlFor="avatarFile">Profile Image</label>

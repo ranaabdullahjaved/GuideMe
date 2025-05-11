@@ -3,8 +3,15 @@ const Mentee = require('../models/Mentee');
 
 exports.getPendingUsers = async (req, res) => {
     try {
+        // For mentors, only get those with verified emails
+        const pendingMentors = await Mentor.find({ 
+            isApproved: false,
+            isEmailVerified: true 
+        });
+        
+        // For mentees, get all pending users since they don't need email verification
         const pendingMentees = await Mentee.find({ isApproved: false });
-        const pendingMentors = await Mentor.find({ isApproved: false });
+        
         const pendingUsers = [
             ...pendingMentees.map(u => ({ ...u.toObject(), role: "mentee" })),
             ...pendingMentors.map(u => ({ ...u.toObject(), role: "mentor" })),
