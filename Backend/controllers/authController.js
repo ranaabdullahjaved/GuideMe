@@ -126,6 +126,7 @@ exports.signup = async (req, res) => {
       try {
       const hashedPassword = await bcrypt.hash(password, 10);
         const emailVerificationToken = crypto.randomBytes(32).toString('hex');
+        console.log('Generated verification token:', emailVerificationToken);
         
       const newMentor = new Mentor({
         name,
@@ -303,11 +304,23 @@ exports.searchMentors = async (req, res) => {
 exports.verifyEmail = async (req, res) => {
   try {
     const { token } = req.params;
+    console.log('Verification attempt with token:', token);
     
     // Find mentor with this verification token
     const mentor = await Mentor.findOne({ emailVerificationToken: token });
+    console.log('Mentor found:', mentor ? {
+      id: mentor._id,
+      email: mentor.email,
+      isEmailVerified: mentor.isEmailVerified,
+      hasToken: !!mentor.emailVerificationToken
+    } : 'No');
     
     if (!mentor) {
+      console.log('No mentor found with token:', token);
+      // Let's check if there are any mentors with this token
+      const allMentors = await Mentor.find({});
+      console.log('Total mentors in database:', allMentors.length);
+      console.log('Mentors with verification tokens:', allMentors.filter(m => m.emailVerificationToken).length);
       return res.status(400).json({ message: 'Invalid or expired verification token' });
     }
 
@@ -315,6 +328,7 @@ exports.verifyEmail = async (req, res) => {
     mentor.isEmailVerified = true;
     mentor.emailVerificationToken = undefined; // Clear the token
     await mentor.save();
+    console.log('Mentor email verified successfully:', mentor.email);
 
     res.status(200).json({ message: 'Email verified successfully' });
   } catch (error) {
