@@ -67,7 +67,7 @@ export default function SignupPage() {
         if (key === "references") {
           formDataToSend.append("references", JSON.stringify(formData.references));
         } else {
-          formDataToSend.append(key, formData[key]);
+        formDataToSend.append(key, formData[key]);
         }
       });
       if (avatarFile) {

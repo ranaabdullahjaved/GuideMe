@@ -244,7 +244,7 @@ exports.login = async (req, res) => {
           message: "Your account is pending admin approval. You will be notified once approved.",
           needsAdminApproval: true
         });
-      }
+    }
     }
 
     const isMatch = await bcrypt.compare(password, user.password);

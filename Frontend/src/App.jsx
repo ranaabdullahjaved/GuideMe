@@ -22,6 +22,7 @@ import CollaborationRequestsPage from './pages/CollabRequest';
 import NewCourseModal from './components/NewCoursesModelPage';
 import EmailVerification from './components/EmailVerification';
 
+
 import ProjectPage from './pages/ProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 

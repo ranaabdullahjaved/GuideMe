@@ -28,7 +28,10 @@ const EditCoursePage = () => {
       description,
       cost: Number.parseFloat(cost),
       mentor: mentor,
+
     };
+
+
 
     try {
       const response = await fetch("http://localhost:5000/api/courses/updateCourseByMentor", {
