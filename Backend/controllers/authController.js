@@ -147,8 +147,25 @@ exports.signup = async (req, res) => {
           isLinkedinVerified: false
         });
 
-      await newMentor.save();
-        console.log('Mentor saved successfully:', newMentor._id);
+      console.log('Attempting to save mentor with token:', {
+        email,
+        token: emailVerificationToken
+      });
+
+      const savedMentor = await newMentor.save();
+      console.log('Mentor saved successfully:', {
+        id: savedMentor._id,
+        email: savedMentor.email,
+        token: savedMentor.emailVerificationToken
+      });
+
+      // Verify the token was saved by querying the database
+      const verifyMentor = await Mentor.findById(savedMentor._id);
+      console.log('Verification of saved mentor:', {
+        id: verifyMentor._id,
+        email: verifyMentor.email,
+        token: verifyMentor.emailVerificationToken
+      });
 
         try {
           // Send verification email
@@ -170,7 +187,6 @@ exports.signup = async (req, res) => {
                 </div>
                 <p>If the button doesn't work, you can also copy and paste this link into your browser:</p>
                 <p style="word-break: break-all;">${verificationLink}</p>
-                <p>This link will expire in 24 hours.</p>
                 <p>Best regards,<br>The GuideMe Team</p>
               </div>
             `
@@ -312,27 +328,50 @@ exports.verifyEmail = async (req, res) => {
       id: mentor._id,
       email: mentor.email,
       isEmailVerified: mentor.isEmailVerified,
-      hasToken: !!mentor.emailVerificationToken
-    } : 'No');
+      token: mentor.emailVerificationToken
+    } : 'No mentor found with this token');
     
     if (!mentor) {
       console.log('No mentor found with token:', token);
-      // Let's check if there are any mentors with this token
-      const allMentors = await Mentor.find({});
-      console.log('Total mentors in database:', allMentors.length);
-      console.log('Mentors with verification tokens:', allMentors.filter(m => m.emailVerificationToken).length);
-      return res.status(400).json({ message: 'Invalid or expired verification token' });
+      return res.status(400).json({ 
+        success: false,
+        message: 'Invalid verification token' 
+      });
     }
 
     // Update mentor's email verification status
     mentor.isEmailVerified = true;
-    mentor.emailVerificationToken = undefined; // Clear the token
+    mentor.emailVerificationToken = undefined;
     await mentor.save();
-    console.log('Mentor email verified successfully:', mentor.email);
+    console.log('Mentor email verified successfully:', {
+      id: mentor._id,
+      email: mentor.email,
+      isEmailVerified: mentor.isEmailVerified
+    });
 
-    res.status(200).json({ message: 'Email verified successfully' });
+    // Verify the changes were saved
+    const verifyMentor = await Mentor.findById(mentor._id);
+    console.log('Verification of updated mentor:', {
+      id: verifyMentor._id,
+      email: verifyMentor.email,
+      isEmailVerified: verifyMentor.isEmailVerified,
+      token: verifyMentor.emailVerificationToken
+    });
+
+    // Send success response with 200 status
+    return res.status(200).json({ 
+      success: true,
+      message: 'Email verified successfully',
+      mentor: {
+        email: mentor.email,
+        isEmailVerified: mentor.isEmailVerified
+      }
+    });
   } catch (error) {
     console.error('Error during email verification:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ 
+      success: false,
+      message: 'Internal server error'
+    });
   }
 };

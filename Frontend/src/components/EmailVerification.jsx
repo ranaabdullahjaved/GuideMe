@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Typography, CircularProgress, Button } from '@mui/material';
@@ -8,15 +8,23 @@ const EmailVerification = () => {
   const navigate = useNavigate();
   const [status, setStatus] = useState('verifying');
   const [message, setMessage] = useState('');
+  const verificationAttempted = useRef(false);
 
   useEffect(() => {
     const verifyEmail = async () => {
+      if (verificationAttempted.current) return;
+      verificationAttempted.current = true;
+
       try {
         const response = await axios.get(`http://localhost:5000/api/auth/verify-email/${token}`);
-        setStatus('success');
-        setMessage(response.data.message);
+        if (response.data.success) {
+          setStatus('success');
+          setMessage(response.data.message);
+        } else {
+          setStatus('error');
+          setMessage(response.data.message || 'Verification failed');
+        }
       } catch (error) {
-        console.error('Verification error:', error);
         setStatus('error');
         setMessage(error.response?.data?.message || 'Verification failed. Please try again.');
       }
@@ -32,6 +40,12 @@ const EmailVerification = () => {
 
   const handleLogin = () => {
     navigate('/login');
+  };
+
+  const handleRetry = () => {
+    verificationAttempted.current = false;
+    setStatus('verifying');
+    setMessage('');
   };
 
   return (
@@ -87,18 +101,34 @@ const EmailVerification = () => {
           <Typography variant="body1" sx={{ mb: 3, color: '#666' }}>
             {message}
           </Typography>
-          <Button 
-            variant="contained" 
-            onClick={handleLogin}
-            sx={{ 
-              backgroundColor: '#007b5e',
-              '&:hover': {
-                backgroundColor: '#005a45'
-              }
-            }}
-          >
-            Go to Login
-          </Button>
+          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
+            <Button 
+              variant="contained" 
+              onClick={handleRetry}
+              sx={{ 
+                backgroundColor: '#007b5e',
+                '&:hover': {
+                  backgroundColor: '#005a45'
+                }
+              }}
+            >
+              Try Again
+            </Button>
+            <Button 
+              variant="outlined" 
+              onClick={handleLogin}
+              sx={{ 
+                borderColor: '#007b5e',
+                color: '#007b5e',
+                '&:hover': {
+                  borderColor: '#005a45',
+                  backgroundColor: 'rgba(0, 123, 94, 0.04)'
+                }
+              }}
+            >
+              Go to Login
+            </Button>
+          </Box>
         </Box>
       )}
     </Box>
