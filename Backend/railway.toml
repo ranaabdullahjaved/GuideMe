@@ -5,7 +5,4 @@ buildCommand = "npm install"
 [deploy]
 startCommand = "npm start"
 healthcheckPath = "/"
-healthcheckTimeout = 100
-
-[phases.setup]
-aptPkgs = ["build-essential", "python3"] 
+healthcheckTimeout = 100 
