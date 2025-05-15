@@ -7,6 +7,41 @@ export default function HomePage() {
   const [mentorSearch, setMentorSearch] = useState("");
   const [mentorResults, setMentorResults] = useState([]);
   const [selectedMentor, setSelectedMentor] = useState("");
+  const [stats, setStats] = useState({
+    mentorCount: '5,700+',
+    matchesCount: '24,900+',
+    countriesCount: '130+'
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch platform statistics
+  useEffect(() => {
+    const fetchStatistics = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/admin/statistics');
+        if (response.data) {
+          setStats({
+            mentorCount: (response.data.mentorCount || 0) > 0 
+              ? response.data.mentorCount.toLocaleString() + '+' 
+              : '1+',
+            matchesCount: (response.data.matchesCount || 0) > 0 
+              ? response.data.matchesCount.toLocaleString() + '+' 
+              : '1+',
+            countriesCount: (response.data.countriesCount || 0) > 0 
+              ? response.data.countriesCount.toLocaleString() + '+' 
+              : '1+'
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching statistics:', error);
+        // Keep the default stats if there's an error
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStatistics();
+  }, []);
 
   const teamMembers = [
     {
@@ -132,15 +167,15 @@ export default function HomePage() {
       <section className="stats">
         <div className="stats-container">
           <div className="stat-item">
-            <div className="stat-number">5,700+</div>
+            <div className="stat-number">{isLoading ? 'Loading...' : stats.mentorCount}</div>
             <div className="stat-label">Available mentors</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">24,900+</div>
+            <div className="stat-number">{isLoading ? 'Loading...' : stats.matchesCount}</div>
             <div className="stat-label">Matches made</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">130+</div>
+            <div className="stat-number">{isLoading ? 'Loading...' : stats.countriesCount}</div>
             <div className="stat-label">Countries represented</div>
           </div>
         </div>
