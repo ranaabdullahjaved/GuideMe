@@ -18,7 +18,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/admin/statistics');
+        const response = await axios.get('https://harmonious-creation-production.up.railway.app/api/admin/statistics');
         if (response.data) {
           setStats({
             mentorCount: (response.data.mentorCount || 0) > 0 
@@ -67,7 +67,7 @@ export default function HomePage() {
     try {
       const currentUser = JSON.parse(localStorage.getItem("user"));
       const menteeId = currentUser._id || currentUser.id;
-      const res = await axios.post('http://localhost:5000/api/chat/conversations', {
+      const res = await axios.post('https://harmonious-creation-production.up.railway.app/api/chat/conversations', {
         menteeId,
         mentorId: mentor,
       });
@@ -80,7 +80,7 @@ export default function HomePage() {
     setMentorSearch(input);
     if (input.length >= 2) {
       try {
-        const response = await fetch(`http://localhost:5000/api/courses/search?query=${input}`);
+        const response = await fetch(`https://harmonious-creation-production.up.railway.app/api/courses/search?query=${input}`);
         const data = await response.json();
         setMentorResults(data);
       } catch (error) {
@@ -142,7 +142,7 @@ export default function HomePage() {
                 <li key={mentor.email} onClick={() => handleMentorSelect(mentor)}>
                   {mentor.avatar && (
                     <img
-                      src={`http://localhost:5000/uploads/${mentor.avatar}`}
+                      src={`https://harmonious-creation-production.up.railway.app/uploads/${mentor.avatar}`}
                       alt="User Avatar"
                       className="navbar-avatar"
                     />

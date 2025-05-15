@@ -13,7 +13,7 @@ const MySubmittedProposals = ({ user }) => {
         try {
             const applicantId = user._id || user.id;
             const res = await axios.get(
-                `http://localhost:5000/api/proposals/my?applicantId=${applicantId}&applicantRole=${user.role}`
+                `https://harmonious-creation-production.up.railway.app/api/proposals/my?applicantId=${applicantId}&applicantRole=${user.role}`
             );
             setProposals(res.data);
         } catch (error) {
@@ -28,7 +28,7 @@ const MySubmittedProposals = ({ user }) => {
     const handleStartChat = async (proposal) => {
         try {
             // First, fetch the project details to know who posted it
-            const projectRes = await axios.get(`http://localhost:5000/api/projects/${proposal.projectId}`);
+            const projectRes = await axios.get(`https://harmonious-creation-production.up.railway.app/api/projects/${proposal.projectId}`);
             const project = projectRes.data;
             let menteeId, mentorId;
             // If the project was posted by a mentee, the applicant is a mentor
@@ -41,7 +41,7 @@ const MySubmittedProposals = ({ user }) => {
                 mentorId = project.postedBy.id;
             }
             // Create or fetch conversation using your chat endpoint
-            const convRes = await axios.post("http://localhost:5000/api/chat/conversations", { menteeId, mentorId });
+            const convRes = await axios.post("https://harmonious-creation-production.up.railway.app/api/chat/conversations", { menteeId, mentorId });
             navigate(`/chat/${convRes.data._id}`);
         } catch (error) {
             console.error("Error starting chat:", error);

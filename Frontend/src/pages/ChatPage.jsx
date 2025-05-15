@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 import '../styles/ChatPage.css';
 
-const socket = io("http://localhost:5000");
+const socket = io("https://harmonious-creation-production.up.railway.app");
 
 const ChatPage = () => {
     const { conversationId } = useParams();
@@ -24,7 +24,7 @@ const ChatPage = () => {
     useEffect(() => {
         if (conversationId) {
             socket.emit("joinConversation", conversationId);
-            axios.get(`http://localhost:5000/api/chat/messages/${conversationId}`)
+            axios.get(`https://harmonious-creation-production.up.railway.app/api/chat/messages/${conversationId}`)
                 .then((res) => setMessages(res.data))
                 .catch((err) => console.error(err));
             socket.on("chatMessage", (msg) => {

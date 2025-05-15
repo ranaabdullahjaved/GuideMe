@@ -17,13 +17,13 @@ const ChatListPage = () => {
         if (user && (user._id || user.id) && (user.role === 'mentee' || user.role === 'mentor')) {
             const userId = user._id || user.id;
             axios
-                .get(`http://localhost:5000/api/chat/conversations?role=${user.role}&userId=${userId}`)
+                .get(`https://harmonious-creation-production.up.railway.app/api/chat/conversations?role=${user.role}&userId=${userId}`)
                 .then(async (res) => {
                     // For each conversation, fetch its last message
                     const convs = await Promise.all(
                         res.data.map(async (conv) => {
                             try {
-                                const msgRes = await axios.get(`http://localhost:5000/api/chat/messages/${conv._id}`);
+                                const msgRes = await axios.get(`https://harmonious-creation-production.up.railway.app/api/chat/messages/${conv._id}`);
                                 const messages = msgRes.data;
                                 conv.lastMessage = messages.length ? messages[messages.length - 1] : null;
                             } catch (error) {
@@ -44,7 +44,7 @@ const ChatListPage = () => {
         if (user.role === 'mentee' && searchTerm.trim().length > 0) {
             const newTimeout = setTimeout(async () => {
                 try {
-                    const res = await axios.get(`http://localhost:5000/api/auth/search?searchTerm=${searchTerm}`);
+                    const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/auth/search?searchTerm=${searchTerm}`);
 
                     setMentorResults(res.data);
                     // console.log(res.data.length > 0);
@@ -66,7 +66,7 @@ const ChatListPage = () => {
         try {
             const currentUser = JSON.parse(localStorage.getItem("user"));
             const menteeId = currentUser._id || currentUser.id;
-            const res = await axios.post('http://localhost:5000/api/chat/conversations', {
+            const res = await axios.post('https://harmonious-creation-production.up.railway.app/api/chat/conversations', {
                 menteeId,
                 mentorId: mentor._id,
             });
@@ -96,7 +96,7 @@ const ChatListPage = () => {
 
                             mentorResults.map((mentor) => (
                                 <div key={mentor._id} className="mentor-result" onClick={() => startConversation(mentor)}>
-                                    <img src={`http://localhost:5000/uploads/${mentor.avatar}`} alt="avatar" className="mentor-avatar" />
+                                    <img src={`https://harmonious-creation-production.up.railway.app/uploads/${mentor.avatar}`} alt="avatar" className="mentor-avatar" />
                                     <span>{mentor.name}</span>
                                     <span className="mentor-skill">{mentor.skill}</span>
                                 </div>
@@ -117,7 +117,7 @@ const ChatListPage = () => {
                         return (
                             <div key={conv._id} className="conversation-item" onClick={() => openConversation(conv._id)}>
                                 <img
-                                    src={`http://localhost:5000/uploads/${other.avatar}`}
+                                    src={`https://harmonious-creation-production.up.railway.app/uploads/${other.avatar}`}
                                     alt="avatar"
                                     className="conversation-avatar"
                                 />

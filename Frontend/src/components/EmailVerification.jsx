@@ -16,7 +16,7 @@ const EmailVerification = () => {
       verificationAttempted.current = true;
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/auth/verify-email/${token}`);
+        const response = await axios.get(`https://harmonious-creation-production.up.railway.app/api/auth/verify-email/${token}`);
         if (response.data.success) {
         setStatus('success');
         setMessage(response.data.message);

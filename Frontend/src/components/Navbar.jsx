@@ -106,7 +106,7 @@ const Navbar = () => {
                                 <div className="user-info">
                                     {user.avatar && (
                                         <img
-                                            src={`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/uploads/${user.avatar}`}
+                                            src={`${import.meta.env.VITE_API_URL || "https://harmonious-creation-production.up.railway.app"}/uploads/${user.avatar}`}
                                             alt="User Avatar"
                                             className="navbar-avatar"
                                         />

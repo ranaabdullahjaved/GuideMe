@@ -12,7 +12,7 @@ const ProjectDetailPage = () => {
 
     const fetchProject = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/projects/${id}`);
+            const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/projects/${id}`);
             setProject(res.data);
         } catch (error) {
             console.error("Error fetching project:", error);

@@ -14,7 +14,7 @@ const ProjectPage = () => {
 
     const fetchProjects = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/projects");
+            const res = await axios.get("https://harmonious-creation-production.up.railway.app/api/projects");
             // Filter out projects posted by the current user in "all" view
             const allProjects = res.data;
             const filteredProjects = allProjects.filter(

@@ -8,7 +8,7 @@ const CoursesPage = () => {
   const [showNewCourseModal, setShowNewCourseModal] = useState(false);
   const [userRole, setUserRole] = useState("");
   const [mentorEmail, setMentorEmail] = useState("");
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL || "https://harmonious-creation-production.up.railway.app";
 
   // Step 1: Retrieve user role and email from localStorage
   useEffect(() => {

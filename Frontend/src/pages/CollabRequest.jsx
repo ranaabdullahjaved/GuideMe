@@ -10,7 +10,7 @@ const CollaborationRequestsPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"))
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"
+  const API_URL = import.meta.env.VITE_API_URL || "https://harmonious-creation-production.up.railway.app"
 
   useEffect(() => {
     fetchCollaborationRequests()

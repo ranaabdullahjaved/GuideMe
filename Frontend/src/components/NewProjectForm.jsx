@@ -25,7 +25,7 @@ const NewProjectForm = ({ onProjectAdded }) => {
                 postedById: user._id || user.id,
                 postedByRole: user.role,
             };
-            const res = await axios.post("http://localhost:5000/api/projects", payload);
+            const res = await axios.post("https://harmonious-creation-production.up.railway.app/api/projects", payload);
             alert(res.data.message);
             onProjectAdded();
             setFormData({

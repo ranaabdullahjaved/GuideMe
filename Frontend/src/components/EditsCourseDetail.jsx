@@ -34,7 +34,7 @@ const EditCoursePage = () => {
 
 
     try {
-      const response = await fetch("http://localhost:5000/api/courses/updateCourseByMentor", {
+      const response = await fetch("https://harmonious-creation-production.up.railway.app/api/courses/updateCourseByMentor", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
