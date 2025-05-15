@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import CourseList from "../components/CoursesList";
 import NewCourseModal from "../components/NewCoursesModelPage";
 import "../styles/courses.css";
@@ -9,6 +8,7 @@ const CoursesPage = () => {
   const [showNewCourseModal, setShowNewCourseModal] = useState(false);
   const [userRole, setUserRole] = useState("");
   const [mentorEmail, setMentorEmail] = useState("");
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   // Step 1: Retrieve user role and email from localStorage
   useEffect(() => {
@@ -32,10 +32,10 @@ const CoursesPage = () => {
       let url = "";
       if (userRole === "mentor") {
         // Mentor sees only their own courses
-        url = `http://localhost:5000/api/courses/byMentor?mentor=${mentorEmail}`;
+        url = `${API_URL}/api/courses/byMentor?mentor=${mentorEmail}`;
       } else {
         // Mentee sees all courses with their email as a query parameter
-        url = `http://localhost:5000/api/courses/allcourses?mentee=${mentorEmail}`;
+        url = `${API_URL}/api/courses/allcourses?mentee=${mentorEmail}`;
       }
 
       const response = await fetch(url);

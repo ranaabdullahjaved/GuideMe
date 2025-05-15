@@ -925,4 +925,7 @@ body {
       }
   }
   
+  /* Copy of courses.css with capitalized filename */
+  @import url('courses.css');
+  
   

@@ -10,6 +10,7 @@ const CollaborationRequestsPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"))
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"
 
   useEffect(() => {
     fetchCollaborationRequests()
@@ -18,7 +19,7 @@ const CollaborationRequestsPage = () => {
   const fetchCollaborationRequests = async () => {
     try {
       setIsLoading(true)
-      const response = await fetch(`http://localhost:5000/api/courses/requests?collabMentor=${user.email}`)
+      const response = await fetch(`${API_URL}/api/courses/requests?collabMentor=${user.email}`)
       const data = await response.json()
       if (Array.isArray(data)) {
         setRequests(data)
@@ -39,7 +40,7 @@ const CollaborationRequestsPage = () => {
 
   const handleAcceptRequest = async (request) => {
     try {
-      const response = await fetch("http://localhost:5000/api/courses/addcollabcourse", {
+      const response = await fetch(`${API_URL}/api/courses/addcollabcourse`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(request),
