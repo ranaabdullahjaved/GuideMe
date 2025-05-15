@@ -1,0 +1,22 @@
+/* Reset CSS for consistent rendering */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Import all other stylesheets */
+@import url('./Navbar.css');
+@import url('./courses.css');
+@import url('./About.css');
+@import url('./Login.css');
+@import url('./SignUp.css');
+@import url('./ProfilePage.css');
+@import url('./Webinar.css');
+@import url('./ChatPage.css');
+@import url('./ChatListPage.css');
+@import url('./ProjectPage.css');
+@import url('./ProjectDetailPage.css');
+@import url('./PasswordModal.css');
+@import url('./ProposalModal.css');
+@import url('./HomePage.css'); 
