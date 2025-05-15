@@ -1,5 +1,4 @@
 // App.jsx
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -19,6 +18,8 @@ import CourseDetailPage from './components/CoursesDetailPage';
 import FeedbackModal from './components/Feeedsback';
 import EditCoursePage from './components/EditsCourseDetail';
 import CollaborationRequestsPage from './pages/CollabRequest';
+import CollaborationsList from './pages/CollaborationsList';
+import SendCollabRequest from './pages/SendCollabRequest';
 import NewCourseModal from './components/NewCoursesModelPage';
 import EmailVerification from './components/EmailVerification';
 
@@ -78,12 +79,28 @@ function App() {
           path="/collaborations"
           element={
             <ProtectedRoute>
-              <CollaborationRequestsPage/>
+              <CollaborationsList />
             </ProtectedRoute>
           }
         />
         <Route
-          path="//course/:id"
+          path="/collaborations/requests"
+          element={
+            <ProtectedRoute>
+              <CollaborationRequestsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/new-collaboration"
+          element={
+            <ProtectedRoute>
+              <SendCollabRequest />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/course/:id"
           element={
             <ProtectedRoute>
               <CourseDetailPage userRole="mentee" />

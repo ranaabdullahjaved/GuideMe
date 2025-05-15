@@ -347,6 +347,56 @@ const checkEnrollment = async (req, res) => {
       res.status(500).json({ message: 'Failed to add collaboration request', error: error.message });
     }
   };
+const deleteCollaborationRequest = async (req, res) => {
+  const { id } = req.body;
+  
+  try {
+    const deletedRequest = await CollaborationRequest.findByIdAndDelete(id);
+    
+    if (!deletedRequest) {
+      return res.status(404).json({ message: 'Collaboration request not found' });
+    }
+    
+    res.status(200).json({ message: 'Collaboration request deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting collaboration request:', error);
+    res.status(500).json({ message: 'Failed to delete collaboration request', error: error.message });
+  }
+};
+
+const getCollaborations = async (req, res) => {
+  const { email } = req.query;
+  try {
+    // Find all collaborations where the user is either a mentor or collaborating mentor
+    const collaborations = await CollabCourse.find({
+      $or: [
+        { mentor: email },
+        { collabMentor: email }
+      ]
+    });
+    
+    res.status(200).json(collaborations);
+  } catch (error) {
+    console.error('Error retrieving collaborations:', error);
+    res.status(500).json({ message: 'Failed to retrieve collaborations', error: error.message });
+  }
+};
+
 // module.exports = { updateCourse };
 
-module.exports = { addCollaborationRequest,searchMentors,getAllCourses,addCourse,getCoursesByMentor,updateCourseByMentor,addFeedback,addProgressbar,checkEnrollment,deleteCourse,getCollaborationRequests,acceptCollaborationRequest};
+module.exports = { 
+  addCollaborationRequest,
+  deleteCollaborationRequest,
+  searchMentors,
+  getAllCourses,
+  addCourse,
+  getCoursesByMentor,
+  updateCourseByMentor,
+  addFeedback,
+  addProgressbar,
+  checkEnrollment,
+  deleteCourse,
+  getCollaborationRequests,
+  acceptCollaborationRequest,
+  getCollaborations
+};

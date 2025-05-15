@@ -52,6 +52,7 @@ exports.getPendingUsers = async (req, res) => {
         // For mentees, get all pending users since they don't need email verification
         const pendingMentees = await Mentee.find({ isApproved: false });
         
+        // Include all user details for both mentors and mentees
         const pendingUsers = [
             ...pendingMentees.map(u => ({ ...u.toObject(), role: "mentee" })),
             ...pendingMentors.map(u => ({ ...u.toObject(), role: "mentor" })),
