@@ -29,6 +29,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors());
 app.use(express.json());
 
+// Add a route handler for the root path (for healthcheck)
+app.get('/', (req, res) => {
+  res.status(200).send('GuideMe API is running');
+});
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
