@@ -169,7 +169,7 @@ exports.signup = async (req, res) => {
 
         try {
           // Send verification email
-          const verificationLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email/${emailVerificationToken}`;
+          const verificationLink = `${"https://guide-me-1o66.vercel.app" || 'http://localhost:3000'}/verify-email/${emailVerificationToken}`;
           const mailOptions = {
             from: `"GuideMe" <${process.env.SMTP_USER}>`,
             to: email,
