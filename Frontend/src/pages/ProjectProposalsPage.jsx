@@ -16,7 +16,7 @@ const ProjectProposalsPage = () => {
     useEffect(() => {
         const fetchProject = async () => {
             try {
-                const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/projects/${id}`);
+                const res = await axios.get(`http://localhost:5000/api/projects/${id}`);
                 setProject(res.data);
             } catch (err) {
                 console.error("Error fetching project details:", err);
@@ -26,7 +26,7 @@ const ProjectProposalsPage = () => {
 
         const fetchProposals = async () => {
             try {
-                const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/proposals/project/${id}`);
+                const res = await axios.get(`http://localhost:5000/api/proposals/project/${id}`);
                 setProposals(res.data);
             } catch (err) {
                 console.error("Error fetching proposals:", err);
@@ -53,7 +53,7 @@ const ProjectProposalsPage = () => {
 
     const refreshProposals = async () => {
         try {
-            const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/proposals/project/${id}`);
+            const res = await axios.get(`http://localhost:5000/api/proposals/project/${id}`);
             setProposals(res.data);
         } catch (err) {
             console.error("Error refreshing proposals:", err);
@@ -62,7 +62,7 @@ const ProjectProposalsPage = () => {
 
     const handleApprove = async (proposalId) => {
         try {
-            const res = await axios.put(`https://harmonious-creation-production.up.railway.app/api/proposals/${proposalId}/approve`);
+            const res = await axios.put(`http://localhost:5000/api/proposals/${proposalId}/approve`);
             setMessage(res.data.message);
             await refreshProposals();
         } catch (error) {
@@ -73,7 +73,7 @@ const ProjectProposalsPage = () => {
 
     const handleDelete = async (proposalId) => {
         try {
-            const res = await axios.delete(`https://harmonious-creation-production.up.railway.app/api/proposals/${proposalId}`);
+            const res = await axios.delete(`http://localhost:5000/api/proposals/${proposalId}`);
             setMessage(res.data.message);
             await refreshProposals();
         } catch (error) {
@@ -94,7 +94,7 @@ const ProjectProposalsPage = () => {
                 menteeId = proposal.applicant.id;
                 mentorId = project.postedBy.id;
             }
-            const res = await axios.post("https://harmonious-creation-production.up.railway.app/api/chat/conversations", { menteeId, mentorId });
+            const res = await axios.post("http://localhost:5000/api/chat/conversations", { menteeId, mentorId });
             navigate(`/chat/${res.data._id}`);
         } catch (error) {
             console.error("Error starting chat:", error);
@@ -136,7 +136,7 @@ const ProjectProposalsPage = () => {
                                         <div className="applicant-info">
                                             {proposal.applicantInfo.avatar ? (
                                                 <img
-                                                    src={`https://harmonious-creation-production.up.railway.app/uploads/${proposal.applicantInfo.avatar}`}
+                                                    src={`http://localhost:5000/uploads/${proposal.applicantInfo.avatar}`}
                                                     alt={proposal.applicantInfo.name}
                                                     className="proposal-avatar"
                                                 />

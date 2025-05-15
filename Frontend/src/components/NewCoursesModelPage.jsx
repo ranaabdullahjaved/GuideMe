@@ -17,7 +17,7 @@ const NewCourseModal = ({ onClose, onAddCourse }) => {
         setMentorSearch(input);
         if (input.length >= 2) {
             try {
-                const response = await fetch(`https://harmonious-creation-production.up.railway.app/api/courses/search?query=${input}`);
+                const response = await fetch(`http://localhost:5000/api/courses/search?query=${input}`);
                 const data = await response.json();
                 setMentorResults(data);
             } catch (error) {
@@ -52,7 +52,7 @@ const NewCourseModal = ({ onClose, onAddCourse }) => {
         };
         if (!selectedMentor) {
             try {
-                const response = await fetch("https://harmonious-creation-production.up.railway.app/api/courses/addcourse", {
+                const response = await fetch("http://localhost:5000/api/courses/addcourse", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const NewCourseModal = ({ onClose, onAddCourse }) => {
             };
 
             try {
-                const response = await fetch("https://harmonious-creation-production.up.railway.app/api/courses/addrequest", {
+                const response = await fetch("http://localhost:5000/api/courses/addrequest", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(collabRequest),

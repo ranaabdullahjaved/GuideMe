@@ -10,7 +10,7 @@
 //   useEffect(() => {
 //     const fetchMentors = async () => {
 //       try {
-//         const response = await axios.get(`https://harmonious-creation-production.up.railway.app/api/users/search`, {
+//         const response = await axios.get(`http://localhost:5000/api/users/search`, {
 //           params: { searchTerm }, // Pass searchTerm as query parameter
 //         });
 //         setMentors(response.data);
@@ -71,7 +71,7 @@ const MentorSearchPage = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const response = await axios.get(`https://harmonious-creation-production.up.railway.app/api/users/search`, {
+        const response = await axios.get(`http://localhost:5000/api/users/search`, {
           params: { searchTerm },
         });
         setMentors(response.data);

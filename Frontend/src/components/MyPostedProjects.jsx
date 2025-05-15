@@ -9,7 +9,7 @@ const MyPostedProjects = ({ user }) => {
     const fetchMyProjects = async () => {
         try {
             const userId = user._id || user.id;
-            const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/projects/my?userId=${userId}&role=${user.role}`);
+            const res = await axios.get(`http://localhost:5000/api/projects/my?userId=${userId}&role=${user.role}`);
             setProjects(res.data);
         } catch (error) {
             console.error("Error fetching my projects:", error);

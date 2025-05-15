@@ -16,7 +16,7 @@ const PasswordModal = ({ onClose, userId, role }) => {
       return;
     }
     try {
-      const res = await axios.put("https://harmonious-creation-production.up.railway.app/api/profile/password", {
+      const res = await axios.put("http://localhost:5000/api/profile/password", {
         id: userId,
         role,
         currentPassword,

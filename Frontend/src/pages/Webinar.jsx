@@ -24,7 +24,7 @@ const Webinar = () => {
     try {
       // If filter is "upcoming", we pass no filter query (or empty string)
       const params = filter === "upcoming" ? {} : { filter };
-      const res = await axios.get("https://harmonious-creation-production.up.railway.app/api/webinars", { params });
+      const res = await axios.get("http://localhost:5000/api/webinars", { params });
       setWebinars(res.data);
     } catch (error) {
       console.error("Error fetching webinars:", error);
@@ -53,7 +53,7 @@ const Webinar = () => {
       if (imageFile) {
         payload.append("image", imageFile);
       }
-      const res = await axios.post("https://harmonious-creation-production.up.railway.app/api/webinars", payload, {
+      const res = await axios.post("http://localhost:5000/api/webinars", payload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setMessage(res.data.message);
@@ -136,7 +136,7 @@ const Webinar = () => {
           <div key={webinar._id} className="result-card">
             {webinar.image ? (
               <img
-                src={`https://harmonious-creation-production.up.railway.app/uploads/${webinar.image}`}
+                src={`http://localhost:5000/uploads/${webinar.image}`}
                 alt="Webinar Thumbnail"
                 className="result-image"
               />

@@ -8,7 +8,7 @@ const AdminDashboard = () => {
 
     const fetchPendingUsers = async () => {
         try {
-            const res = await axios.get("https://harmonious-creation-production.up.railway.app/api/admin/pending-users");
+            const res = await axios.get("http://localhost:5000/api/admin/pending-users");
             setPendingUsers(res.data);
         } catch (error) {
             console.error("Error fetching pending users:", error);
@@ -21,7 +21,7 @@ const AdminDashboard = () => {
 
     const handleApprove = async (id, role) => {
         try {
-            const res = await axios.put("https://harmonious-creation-production.up.railway.app/api/admin/approve-user", { id, role });
+            const res = await axios.put("http://localhost:5000/api/admin/approve-user", { id, role });
             setMessage(res.data.message);
             fetchPendingUsers();
         } catch (error) {
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 
     const handleDelete = async (id, role) => {
         try {
-            const res = await axios.delete("https://harmonious-creation-production.up.railway.app/api/admin/delete-user", { data: { id, role } });
+            const res = await axios.delete("http://localhost:5000/api/admin/delete-user", { data: { id, role } });
             setMessage(res.data.message);
             fetchPendingUsers();
         } catch (error) {
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
                                 <td>
                                     {user.avatar ? (
                                         <img
-                                            src={`https://harmonious-creation-production.up.railway.app/uploads/${user.avatar}`}
+                                            src={`http://localhost:5000/uploads/${user.avatar}`}
                                             alt="Avatar"
                                             className="admin-avatar"
                                         />

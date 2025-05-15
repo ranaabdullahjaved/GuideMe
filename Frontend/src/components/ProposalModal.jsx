@@ -33,7 +33,7 @@ const ProposalModal = ({ projectId, onClose }) => {
                 proposedBudget,
                 timeline,
             };
-            const res = await axios.post("https://harmonious-creation-production.up.railway.app/api/proposals", payload);
+            const res = await axios.post("http://localhost:5000/api/proposals", payload);
             setMessage(res.data.message);
             setTimeout(() => onClose(), 1500);
         } catch (error) {

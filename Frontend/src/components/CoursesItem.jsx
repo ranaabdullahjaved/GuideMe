@@ -21,7 +21,7 @@ const CourseItem = ({ course, userRole, style }) => {
   useEffect(() => {
     const checkEnrollment = async () => {
       try {
-        const response = await fetch("https://harmonious-creation-production.up.railway.app/api/courses/checkEnrollement", {
+        const response = await fetch("http://localhost:5000/api/courses/checkEnrollement", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -66,7 +66,7 @@ const CourseItem = ({ course, userRole, style }) => {
     if (!confirmDelete) return
 
     try {
-      const response = await fetch("https://harmonious-creation-production.up.railway.app/api/courses/deleteCourse", {
+      const response = await fetch("http://localhost:5000/api/courses/deleteCourse", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const CourseItem = ({ course, userRole, style }) => {
     try {
       const currentUser = JSON.parse(localStorage.getItem("user"))
       const menteeId = currentUser._id || currentUser.id
-      const res = await axios.post("https://harmonious-creation-production.up.railway.app/api/chat/conversations", {
+      const res = await axios.post("http://localhost:5000/api/chat/conversations", {
         menteeId,
         mentorId: mentor,
       })

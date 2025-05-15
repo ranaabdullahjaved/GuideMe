@@ -26,7 +26,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       // POST to your updated backend endpoint
-      const response = await axios.post('https://harmonious-creation-production.up.railway.app/api/auth/login', formData);
+      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
       const { token, user } = response.data;
 
       localStorage.setItem('authToken', token);

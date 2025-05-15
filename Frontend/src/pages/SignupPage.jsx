@@ -86,7 +86,7 @@ export default function SignupPage() {
         console.log(pair[0] + ': ' + pair[1]);
       }
 
-      const response = await axios.post("https://harmonious-creation-production.up.railway.app/api/auth/signup", formDataToSend, {
+      const response = await axios.post("http://localhost:5000/api/auth/signup", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert(response.data.message || "Sign up successful!");

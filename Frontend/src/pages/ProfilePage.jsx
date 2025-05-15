@@ -18,7 +18,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`https://harmonious-creation-production.up.railway.app/api/profile/${userId}/${role}`);
+        const res = await axios.get(`http://localhost:5000/api/profile/${userId}/${role}`);
         if (res.data.user) {
           setProfileData(res.data.user);
           setFormData({
@@ -57,7 +57,7 @@ const ProfilePage = () => {
       if (avatarFile) {
         payload.append("avatar", avatarFile);
       }
-      const res = await axios.put("https://harmonious-creation-production.up.railway.app/api/profile", payload, {
+      const res = await axios.put("http://localhost:5000/api/profile", payload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setMessage(res.data.message);
@@ -88,7 +88,7 @@ const ProfilePage = () => {
         {message && <p className="profile-message">{message}</p>}
         {profileData?.avatar && (
           <img
-            src={`https://harmonious-creation-production.up.railway.app/uploads/${profileData.avatar}`}
+            src={`http://localhost:5000/uploads/${profileData.avatar}`}
             alt="Avatar"
             className="profile-avatar"
           />
