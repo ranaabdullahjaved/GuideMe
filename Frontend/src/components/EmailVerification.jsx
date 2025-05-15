@@ -18,8 +18,8 @@ const EmailVerification = () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/auth/verify-email/${token}`);
         if (response.data.success) {
-          setStatus('success');
-          setMessage(response.data.message);
+        setStatus('success');
+        setMessage(response.data.message);
         } else {
           setStatus('error');
           setMessage(response.data.message || 'Verification failed');
@@ -31,7 +31,7 @@ const EmailVerification = () => {
     };
 
     if (token) {
-      verifyEmail();
+    verifyEmail();
     } else {
       setStatus('error');
       setMessage('Invalid verification link. Please try again.');
@@ -126,8 +126,8 @@ const EmailVerification = () => {
                 }
               }}
             >
-              Go to Login
-            </Button>
+            Go to Login
+          </Button>
           </Box>
         </Box>
       )}
