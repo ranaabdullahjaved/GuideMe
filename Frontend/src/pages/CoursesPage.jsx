@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import CourseList from "../components/CoursesList";
 import NewCourseModal from "../components/NewCoursesModelPage";
 import "../styles/courses.css";
